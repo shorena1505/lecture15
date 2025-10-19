@@ -20,14 +20,27 @@ class CustomUserManager(BaseUserManager):
         return user
 
 
-
-
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(unique=True)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
+    email = models.EmailField(
+        unique=True,
+        verbose_name="Email address"
+    )
+    first_name = models.CharField(
+        max_length=30,
+        verbose_name="First name"
+    )
+    last_name = models.CharField(
+        max_length=30,
+        verbose_name="Last name"
+    )
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name="Active"
+    )
+    is_staff = models.BooleanField(
+        default=False,
+        verbose_name="Staff status"
+    )
 
     objects = CustomUserManager()
 
@@ -36,7 +49,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
-
 
     class Meta:
         verbose_name = 'User'
